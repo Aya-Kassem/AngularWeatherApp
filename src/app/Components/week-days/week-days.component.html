@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="p-1 days">
+            <a *ngFor="let dayWeather of threeDaysWeather" #selectedDay
+                [ngClass]="{ active: dayWeather.name === currentDay }"
+                class="mb-1 d-flex justify-content-between align-items-center day first-day px-2"
+                (click)="getDayWeather(dayWeather.name, selectedDay)">
+                <span>{{dayWeather.name}}</span>
+                <div class="d-flex align-items-center">
+                    <img [src]="dayWeather.icon" alt="day Icon" width="35">
+                    <span>{{dayWeather.temp}} ℃</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

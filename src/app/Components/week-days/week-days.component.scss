@@ -1,0 +1,27 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.days{
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    height: 200px;
+}
+.day {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+.current-day .first {
+    height: 200px;
+}
+.active {
+    background-color: var(--active);
+    border-radius: 3px;
+}
+.padding{
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
