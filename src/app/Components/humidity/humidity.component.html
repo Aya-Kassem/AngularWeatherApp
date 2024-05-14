@@ -1,1 +1,12 @@
-<p>humidity works!</p>
+<div class="p-1 border humidityContainer d-flex justify-content-between  flex-column">
+    <div class="d-flex align-items-center">
+        <i class="bi bi-moisture"></i>
+        <p class="pt-1 px-2 m-0">Humidity</p>
+    </div>
+    <div class="pie">
+        <circle-progress [percent]="humidityPercentage" [outerStrokeWidth]="6" [innerStrokeWidth]="1"
+            [outerStrokeColor]="mainColor" [innerStrokeColor]="'inherit'" [animation]="true" [animationDuration]="600"
+            [unitsFontSize]="'25'" [titleFontSize]="'25'" [titleColor]="mainColor" [unitsColor]="mainColor"
+            [showSubtitle]="false" [radius]="60" ></circle-progress>
+    </div>
+</div>

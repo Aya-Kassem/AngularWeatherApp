@@ -1,23 +1,19 @@
 export interface weather {
-    index: string;
+    dayName: string;
     sunrise: string;
     sunset: string;
-    date: string;
-    dayName: string;
-    temp: string;
-    icon: string;
     uv: number;
-    uvIndex: number;
-    uvRadiationDegree: string; 
     humidity: number;
     oldHours: string[];
-    hours: string[];
+    date: string;
+    temp: string;
+    icon: string
 }
 
 export interface dayData{
     temp: string,
     icon: string,
-    name: string
+    day: string
 }
 
 export interface countryData {

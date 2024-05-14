@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-2">
         <!-- DAYS PART -->
         <div class="col-md-4 p-1">
             <weekDays [threeDaysWeather]="daysUI" (selectedDay)="getWeatherOfSelectedDay($event)"></weekDays>
@@ -16,7 +16,24 @@
 
         <!-- CHART PART -->
         <div class="col-md-8 p-1"  >
-            <!-- <chart [hoursArr]="hoursTemp"></chart> -->
+            <temperatureChart></temperatureChart>
+        </div>
+    </div>
+
+    <div class="row second">
+        <!-- UV PART -->
+        <div class="col-md-4 px-1 my-2">
+            <UV [degree]="UV"></UV>
+        </div>
+
+        <!-- SUN PART -->
+        <div class="col-md-4 px-1 my-2">
+            <equinoxes [sunriseTime]="equinoxes.sunrise" [sunsetTime]="equinoxes.sunset"></equinoxes>
+        </div>
+
+        <!-- HUMIDITY PART -->
+        <div class="col-md-4 px-1 my-2">
+            <humidity [humidityPercentage] = "humidity"></humidity>
         </div>
     </div>
 </div>

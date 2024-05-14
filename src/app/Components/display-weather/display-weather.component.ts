@@ -30,73 +30,82 @@ export class DisplayWeatherComponent {
   allWeatherData!: weather[];
   currentDayWeather!: weather;
   daysUI!: dayData[];
+  currentDayName!: string;
+  todayDate!: string;
+  UV!: number;
+  humidity!: number;
+  equinoxes: { sunrise: string, sunset: string } = { sunrise: '', sunset: '' };
+
 
   constructor(private _WeatherService: WeatherService, private _DatePipe: DatePipe) { }
 
   ngOnInit() {
-    this.getCurrentCountryData();
+    this.currentDayName = this._DatePipe.transform(new Date(), 'EEEE')!;
+    this.todayDate = this._DatePipe.transform(new Date(), 'yyyy-MM-dd')!;
+    this.getDefaultCountryWeather();
+    this.getUserSearchWeather();
   }
 
-  getCurrentCountryData() {
+  getDefaultCountryWeather() {
     this.subscription = this._WeatherService.fetchWeatherData().subscribe((data) => {
-      let [country, cityName, localtime, weatherState] = [data.location.country, data.location.name, data.location.localtime, data.current.condition.text];
-      this.countryMainData.name = country;
-      this.countryMainData.city = cityName;
-      this.countryMainData.time = localtime;
-      this.countryMainData.state = weatherState;
-
-      this.prepareWeatherData(data.forecast.forecastday);
+      this.getCurrentCountryData(data)
     })
   }
 
-  prepareWeatherData(data: any) {
-    let allWeatherDays: any = [];
-    let index = 0;
+  getCurrentCountryData(allResponse: any) {
+    let [country, cityName, localtime, weatherState] = [allResponse.location.country, allResponse.location.name, allResponse.location.localtime, allResponse.current.condition.text];
+    this.countryMainData.name = country;
+    this.countryMainData.city = cityName;
+    this.countryMainData.time = localtime;
+    this.countryMainData.state = weatherState;
 
-    data.forEach((el: any) => {
-      let day: any = {};
-      day.index = index;
-      day.sunrise = el.astro.sunrise;
-      day.sunset = el.astro.sunset;
-      day.date = el.date;
-      day.dayName = this.dateTransform(el.date);
-      day.temp = el.day.avgtemp_c;
-      day.icon = 'https:' + el.day.condition.icon;
-      day.uv = el.day.uv;
-      // day.uvIndex = this.getUvIndex(day.uv);
-      // day.uvRadiationDegree = this.getUvIndex(day.uv) == 'Very High' ? 'Very_High' : this.getUvIndex(day.uv);
-      day.humidity = el.day.avghumidity;
-      day.oldHours = el.hour.map((hr: any) => { return hr['temp_c'] });
-      // day.hours = this.getAvgHours(day.oldHours);
-
-      allWeatherDays.push(day);
-      index++;
-      // if (day.dayName == this.currentDay) {
-      //   curr = day.index
-      // }
-    });
-    this.allWeatherData = allWeatherDays;
-    this.daysComponentData()
+    this.getallThreeDaysWeather(allResponse.forecast.forecastday);
   }
 
-  dateTransform(day: string) {
-    const date = new Date(day);
-    const dayName = this._DatePipe.transform(date, 'EEEE');
-    return dayName;
+  getallThreeDaysWeather(data: any) {
+    const threeDaysWeather = data.map((el: any) => ({
+      dayName: this._DatePipe.transform(new Date(el.date), 'EEEE'),
+      sunrise: el.astro.sunrise,
+      sunset: el.astro.sunset,
+      humidity: el.day.avghumidity,
+      oldHours: el.hour.map((hr: any) => { return hr['temp_c'] }),
+      uv: el.day.uv,
+      date: el.date,
+      temp: el.day.avgtemp_c,
+      icon: `https:${el.day.condition.icon}`
+    }));
+
+    this.allWeatherData = threeDaysWeather;
+    this.getDaysNameAndStatus();
+    this.currentDayWeather = this.allWeatherData[0];
+    this.buildUI()
   }
 
-  daysComponentData() {
-    let arr: dayData[] = [];
-    this.allWeatherData.forEach((el) => {
-      const [name, temp, icon] = [el.dayName, el.temp, el.icon];
-      let obj = { name, temp, icon }
-      arr.push(obj);
-    })
-    this.daysUI = arr;
+  getDaysNameAndStatus() {
+    this.daysUI = this.allWeatherData.map((el: any) => ({ day: el.dayName, temp: el.temp, icon: el.icon }));
   }
 
   getWeatherOfSelectedDay(day: string) {
     this.currentDayWeather = this.allWeatherData.filter((el) => el.dayName === day)[0];
-    console.log(this.currentDayWeather);
+    this.buildUI()
   }
+
+  buildUI() {
+    this.UV = this.currentDayWeather.uv;
+    this.humidity = this.currentDayWeather.humidity;
+    this.equinoxes.sunrise = this.currentDayWeather.sunrise
+    this.equinoxes.sunset = this.currentDayWeather.sunset
+  }
+
+  getUserSearchWeather() {
+    this.subscription = this._WeatherService.userClicked.subscribe((val) => {
+      if (val) this._WeatherService.getUserSearchResult();
+    })
+
+    this.subscription = this._WeatherService.result$.subscribe((result) => {
+      this.getCurrentCountryData(result)
+    })
+  }
+
+
 }

@@ -12,17 +12,11 @@ import { dayData } from 'src/app/Models/weather.interface';
 })
 export class WeekDaysComponent {
   @Input() threeDaysWeather!: dayData[];
-  currentDay!: string;
   @Output() selectedDay: EventEmitter<string> = new EventEmitter<string>();
-  constructor(private _DatePipe: DatePipe) { }
-  
-  ngOnInit() {
-    this.currentDay = this._DatePipe.transform(new Date(), 'EEEE')!;
-  }
 
-  getDayWeather(selectedDay: string, day: HTMLAnchorElement) {
+  getDayWeather(selectedDay: HTMLSpanElement, day: HTMLAnchorElement) {
     this.getActiveDay(day);
-    this.selectedDay.emit(selectedDay)
+    this.selectedDay.emit(selectedDay.innerText);
   }
 
   getActiveDay(day: HTMLAnchorElement) {
