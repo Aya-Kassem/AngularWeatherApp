@@ -13,7 +13,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 
 export class TemperatureChartComponent {
   Highcharts: typeof Highcharts = Highcharts;
-  @Input() hoursArr!: string[];
+  @Input() hoursArr!: number[];
   updateFlag: boolean = false;
   defaultHours = ['14.35', '13.70', '13.20', '12.80', '14.75', '17.70', '19.65', '19.30', '19.35', '18.15', '16.60', '15.50'];
   constructor() { }
@@ -97,6 +97,7 @@ export class TemperatureChartComponent {
 
     }]
   }
+
   updateChart() {
     this.chartOptions.series![0] = {
       type: 'area',
@@ -105,7 +106,21 @@ export class TemperatureChartComponent {
     this.updateFlag = true;
   }
 
+  getAvgHours(hours: number[]) {
+    var avgHours = [];
+    for (var i = 0; i < hours.length; i++) {
+      var avg: any = (hours[i] + (hours[i + 1])) / 2;
+      avg = avg.toFixed(2);
+      avgHours.push(avg)
+      i += 1
+    }
+    return avgHours;
+  }
+
   ngOnChanges() {
-    if (this.hoursArr) this.updateChart();
+    if (this.hoursArr) {
+      this.hoursArr = this.getAvgHours(this.hoursArr);
+      this.updateChart();
+    }
   }
 }

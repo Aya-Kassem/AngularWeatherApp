@@ -4,21 +4,11 @@ export interface weather {
     sunset: string;
     uv: number;
     humidity: number;
-    oldHours: string[];
+    oldHours: number[];
     date: string;
     temp: string;
     icon: string
 }
 
-export interface dayData{
-    temp: string,
-    icon: string,
-    day: string
-}
 
-export interface countryData {
-    name: string,
-    city: string,
-    time: string,
-    state: string
-} 
+

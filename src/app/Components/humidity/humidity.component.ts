@@ -11,5 +11,5 @@ import { NgCircleProgressModule, CircleProgressOptions } from 'ng-circle-progres
 })
 export class HumidityComponent {
   @Input() humidityPercentage!: number;
-  mainColor: string = 'rgba(255, 255, 255, 0.8)'
+  mainColor: string = 'rgba(255, 255, 255, 0.8)';
 }

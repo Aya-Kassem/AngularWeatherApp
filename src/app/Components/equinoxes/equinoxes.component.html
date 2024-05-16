@@ -1,17 +1,18 @@
 <div class="p-1 border sunContainer d-flex justify-content-between flex-column">
     <div class="circle"></div>
+    <!-- <i class="bi bi-sun sun"></i> -->
     <div class="d-flex align-items-center">
         <i class="bi bi-sunrise"></i>
         <p class="py-1 px-2 m-0">Sun</p>
     </div>
     <div class="d-flex justify-content-between">
-        <div>
+        <div class="sunrise">
             <span class="small-text m-0 p-0">Sunrise</span>
-            <p class="m-0 sun-time sunrise">{{ sunriseTime }}</p>
+            <p class="m-0 sun-time">{{ sunriseTime }}</p>
         </div>
-        <div>
+        <div class="sunset">
             <span class="small-text m-0 p-0">Sunset</span>
-            <p class="m-0 sun-time sunset">{{ sunsetTime }}</p>
+            <p class="m-0 sun-time">{{ sunsetTime }}</p>
         </div>
     </div>
 </div>

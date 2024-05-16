@@ -7,7 +7,9 @@ import { UVComponent } from '../uv/uv.component';
 import { WeekDaysComponent } from '../week-days/week-days.component';
 import { Subscription } from 'rxjs';
 import { WeatherService } from 'src/app/Services/weather.service';
-import { countryData, dayData, weather } from 'src/app/Models/weather.interface';
+import { weather } from 'src/app/Models/weather.interface';
+import { countryData } from 'src/app/Models/currentCountry.interface';
+import { dayData } from 'src/app/Models/day.interface';
 
 @Component({
   selector: 'displayWeather',
@@ -35,7 +37,7 @@ export class DisplayWeatherComponent {
   UV!: number;
   humidity!: number;
   equinoxes: { sunrise: string, sunset: string } = { sunrise: '', sunset: '' };
-
+  hours!: number[];
 
   constructor(private _WeatherService: WeatherService, private _DatePipe: DatePipe) { }
 
@@ -58,7 +60,7 @@ export class DisplayWeatherComponent {
     this.countryMainData.city = cityName;
     this.countryMainData.time = localtime;
     this.countryMainData.state = weatherState;
-
+    this._WeatherService.state.next(this.countryMainData.state);
     this.getallThreeDaysWeather(allResponse.forecast.forecastday);
   }
 
@@ -93,8 +95,9 @@ export class DisplayWeatherComponent {
   buildUI() {
     this.UV = this.currentDayWeather.uv;
     this.humidity = this.currentDayWeather.humidity;
-    this.equinoxes.sunrise = this.currentDayWeather.sunrise
-    this.equinoxes.sunset = this.currentDayWeather.sunset
+    this.equinoxes.sunrise = this.currentDayWeather.sunrise;
+    this.equinoxes.sunset = this.currentDayWeather.sunset;
+    this.hours = this.currentDayWeather.oldHours;
   }
 
   getUserSearchWeather() {
@@ -106,6 +109,5 @@ export class DisplayWeatherComponent {
       this.getCurrentCountryData(result)
     })
   }
-
 
 }

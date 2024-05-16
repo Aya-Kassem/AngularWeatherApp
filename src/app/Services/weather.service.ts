@@ -11,7 +11,7 @@ export class WeatherService {
     userClicked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     resultSubject = new Subject<any>();
     result$ = this.resultSubject.asObservable();
-    
+    state: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
     constructor(private _HttpClient: HttpClient) { }
     fetchWeatherData(city: string = 'Cairo') {

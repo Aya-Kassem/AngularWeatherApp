@@ -15,9 +15,11 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   cities!: string[];
   searchCity!: string;
+  currentCity!: string;
 
   constructor(private _weatherService: WeatherService) { }
   ngOnInit() {
+    this.currentCity = 'Cairo';
     let savedCities = JSON.parse(localStorage.getItem('cities')!) || [];
     if (savedCities) {
       this.cities = savedCities;
@@ -25,27 +27,33 @@ export class NavbarComponent {
   }
 
   getUserSearchCity(event: Event) {
-    let searchInput = document.querySelector('#searchKeyWord') as HTMLInputElement
+    let searchInput = document.querySelector('#searchKeyWord') as HTMLInputElement;
     if ((event as KeyboardEvent).key === 'Enter' || (event as MouseEvent).type === 'click') {
       this.searchCity = searchInput.value;
+      this.currentCity = this.getFirstLetterCapitalize(searchInput.value);
       searchInput.value = '';
       this._weatherService.userSearch = this.searchCity;
-      this._weatherService.userClicked.next(true)
-      this.saveUserInput(this.searchCity)
+      this._weatherService.userClicked.next(true);
+      this.saveUserInput();
     }
 
   }
 
   getWeatherfromfavourites(event: DropdownChangeEvent) {
+    this.currentCity = event.value;
     this._weatherService.userSearch = event.value;
-    this._weatherService.userClicked.next(true)
+    this._weatherService.userClicked.next(true);
   }
 
-  saveUserInput(searchWord: string) {
-    const capitalizeFirstLetter = searchWord.slice(0, 1).toLocaleUpperCase();
-    const city = capitalizeFirstLetter + searchWord.slice(1);
+  saveUserInput() {
+    const city = this.getFirstLetterCapitalize(this.searchCity);
     if (!this.cities.includes(city)) this.cities.push(city)
     localStorage.setItem('cities', JSON.stringify(this.cities))
   }
 
+  getFirstLetterCapitalize(word: string){
+    const capitalizeFirstLetter = word.slice(0, 1).toLocaleUpperCase();
+    const city = capitalizeFirstLetter + word.slice(1);
+    return city;
+  }
 }

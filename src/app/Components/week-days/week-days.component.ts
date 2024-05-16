@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { dayData } from 'src/app/Models/weather.interface';
+import { dayData } from 'src/app/Models/day.interface';
 
 @Component({
   selector: 'weekDays',
