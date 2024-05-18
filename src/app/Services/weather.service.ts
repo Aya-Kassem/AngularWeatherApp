@@ -15,21 +15,26 @@ export class WeatherService {
     validSearch = new Subject<boolean>();
 
     constructor(private _HttpClient: HttpClient) { }
-    fetchWeatherData(city: string = this.defaultCountry ) {
+    fetchWeatherData(city: string = this.defaultCountry ) {    
         return this._HttpClient.get<any>(`https://api.weatherapi.com/v1/forecast.json?key=${this.key}&q=${city.toLocaleLowerCase()}&days=3`);
     }
 
     getUserSearchResult() {
-        this.fetchWeatherData(this.userSearch).subscribe((val) => {
-            this.resultSubject.next(val)
+        this.fetchWeatherData(this.userSearch).subscribe({
+            next: (val) => this.resultSubject.next(val),
+            error: (err) => console.log(err) 
         })
     }
   
-    isValidCountry(userCountry: string) {
-        this.defaultCountry = userCountry;
+    isValidCountry(userCountry: string) {   
+        this.userSearch = userCountry;   
         this.fetchWeatherData(userCountry).subscribe({
-            next: (val) => this.validSearch.next(true),
-            error: (err) => this.validSearch.next(false)
+            next: (val) => {
+                if(val) this.validSearch.next(true)
+            },
+            error: (err) => {
+                if(err) this.validSearch.next(false)
+            }
         })
     }
 

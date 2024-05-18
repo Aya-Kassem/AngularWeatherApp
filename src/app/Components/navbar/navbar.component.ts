@@ -3,7 +3,7 @@ import { WeatherService } from 'src/app/Services/weather.service';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'navbar',
@@ -12,15 +12,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss']
 })
-
 export class NavbarComponent {
     cities!: string[];
-    searchCity!: string;
     currentCity!: string;
     @ViewChild('country') inputField!: ElementRef;
     showErr: boolean = false;
-
+    validSearchSubscription!: Subscription;
+    
     constructor(private _weatherService: WeatherService, private _Renderer2: Renderer2) { }
+    
     ngOnInit() {
         this.currentCity = this._weatherService.defaultCountry;
         let savedCities = JSON.parse(localStorage.getItem('cities')!) || [];
@@ -42,9 +42,11 @@ export class NavbarComponent {
         this._weatherService.userClicked.next(true);
     }
 
-    saveUserInput() {
-        if (!this.cities.includes(this.currentCity)) this.cities.push(this.currentCity)
-        localStorage.setItem('cities', JSON.stringify(this.cities))
+    saveUserInput(country: string) {
+        if (!this.cities.includes(country)) {
+            this.cities.push(country);
+        }
+        localStorage.setItem('cities', JSON.stringify(this.cities));
     }
 
     getFirstLetterCapitalize(word: string) {
@@ -54,23 +56,31 @@ export class NavbarComponent {
     }
 
     isValidCountry(country: string) {
+        if (this.validSearchSubscription) {
+            this.validSearchSubscription.unsubscribe();
+        }
         this._weatherService.isValidCountry(country);
-        this._weatherService.validSearch.subscribe((valid) => {
+        this.validSearchSubscription = this._weatherService.validSearch.subscribe((valid) => {
             if (valid) {
-                this.searchCity = country;
                 this.currentCity = this.getFirstLetterCapitalize(country);
-
-                this._weatherService.userSearch = this.searchCity;
                 this._weatherService.userClicked.next(true);
-                this.saveUserInput();
+                this.saveUserInput(this.currentCity);
+                this.showErr = false;
             } else {
                 this.showErr = true;
             }
-        })
+        });
     }
 
     hideErrorMessages(userInput: HTMLInputElement) {
-        if(userInput) this.showErr = false;
+        if (userInput) {
+            this.showErr = false;
+        }
     }
 
+    ngOnDestroy() {
+        if (this.validSearchSubscription) {
+            this.validSearchSubscription.unsubscribe();
+        }
+    }
 }

@@ -23,6 +23,7 @@ export class DefaultCountryComponent {
     this._WeatherService.isValidCountry(country);
     this._WeatherService.validSearch.subscribe((valid) => {
       if (valid) {
+        this._WeatherService.defaultCountry = country;
         this.isModalVisible.emit(false);
       } else {
         this.showInvalidMsg = true;
