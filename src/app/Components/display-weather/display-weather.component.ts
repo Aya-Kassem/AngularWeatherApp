@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { EquinoxesComponent } from '../equinoxes/equinoxes.component';
 import { HumidityComponent } from '../humidity/humidity.component';
@@ -28,7 +28,7 @@ import { dayData } from 'src/app/Models/day.interface';
 
 export class DisplayWeatherComponent {
   subscription!: Subscription;
-  countryMainData: countryData = { name: '', city: '', time: '', state: '' };
+  @Output() countryMainData: EventEmitter<countryData> = new EventEmitter<countryData>();
   allWeatherData!: weather[];
   currentDayWeather!: weather;
   daysUI!: dayData[];
@@ -56,11 +56,7 @@ export class DisplayWeatherComponent {
 
   getCurrentCountryData(allResponse: any) {
     let [country, cityName, localtime, weatherState] = [allResponse.location.country, allResponse.location.name, allResponse.location.localtime, allResponse.current.condition.text];
-    this.countryMainData.name = country;
-    this.countryMainData.city = cityName;
-    this.countryMainData.time = localtime;
-    this.countryMainData.state = weatherState;
-    this._WeatherService.state.next(this.countryMainData.state);
+    this.countryMainData.emit({name: country, city: cityName, time: localtime, state: weatherState});
     this.getallThreeDaysWeather(allResponse.forecast.forecastday);
   }
 
@@ -110,4 +106,7 @@ export class DisplayWeatherComponent {
     })
   }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
 }

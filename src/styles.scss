@@ -1,4 +1,3 @@
-// @import '~primeicons/primeicons.css';
 @import '~primeng/resources/themes/saga-blue/theme.css';
 @import '~primeng/resources/primeng.min.css';
 
@@ -8,6 +7,14 @@
     --white-color: #fff;
     --chart-color: rgba(255, 255, 255, 0.8);
     --circleProgressBar: rgba(255, 255, 255, 0.5)
+}
+
+*:focus {
+    box-shadow: none !important;
+}
+
+*:focus-visible {
+    outline: none !important;
 }
 
 .nav {

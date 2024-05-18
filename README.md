@@ -1,27 +1,42 @@
-# WeatherApp
+# Angular Weather App ...
+This project is a simple Weather application built with Angular 16, displaying 3 days weather for user input Country.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.7.
+## App Features ... 
+1- Displaying Weather For 3 Days.
+  - User Can Choose each day to see the weather of selected Day.
+  - HighCharts used to display the avg temperatures along the day.
+  - Circle Progress to show the Humidity level in each day.
+  - UV gradient to display the UV degree in each day.
+  - Sunrise and Sunset Times in each Day.
+  
 
-## Development server
+2- User Default Country.
+  - Enable User to input the default country name or city name and save it to local storage as default country.
+  - Validate User Input.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+3- User Search.
+  - Enable user to search any Country or city to check the weather.
+  - Validate User Input.
 
-## Code scaffolding
+4- Favorite Section.
+  - Save user search in Fav dropdown so user can choose from favorites later.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologies Used
+- Angular 16, Standalone Components.
+- TypeScript
+- HTML/SCSS
+- Bootstrap / bootstrap-icons
+- Highcharts Angular
+- Circle Progress
+- PrimeNG 17
+- LocalStorage
 
-## Build
+##  App Demo
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
+1. Clone the repository: `git clone https://github.com/your-username/your-repo.git`
+2. Navigate to the project directory: `cd your-repo`
+3. Install dependencies: `npm install -f`
+4. Run the development server: `ng serve`
+5. Open your browser and navigate to `http://localhost:4200/`
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

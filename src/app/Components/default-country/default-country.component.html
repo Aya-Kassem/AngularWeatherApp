@@ -1,0 +1,12 @@
+<div class="defaultCountry ">
+    <div class="main d-flex justify-content-center align-items-center h-100 ">
+        <div class="country m-auto p-4 d-flex flex-column align-items-start  ">
+            <p class="mb-3 header">Enter Your Country Or City Name!</p>
+            <label for="name"></label>
+            <input #country type="text" id="name" class="mb-3 py-1 px-2" (input)="hideErrorMessages(country)">
+            <p class="err mb-3" *ngIf="showErrorMsg">Please Enter Your Country Or City!</p>
+            <p class="err mb-3" *ngIf="showInvalidMsg">Please Enter Valid Name!</p>
+            <button type="button" (click)="getUserCountry(country.value)">Save</button>
+        </div>
+    </div>
+</div>

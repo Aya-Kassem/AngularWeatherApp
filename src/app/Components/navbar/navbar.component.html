@@ -3,8 +3,13 @@
     <div class="row px-4 px-sm-2 d-flex justify-content-center align-items-center nav">
         <div class="col-sm-6 col-md-5 col-lg-4 px-1">
             <div class="search-bar px-2 d-flex align-items-center justify-content-between">
-                <input type="text" placeholder="Search a Place" id="searchKeyWord" (keypress)="getUserSearchCity($event)" >
-                <i class="bi bi-search search-icon" (click)="getUserSearchCity($event)"></i>
+                <input 
+                    #country type="text" 
+                    placeholder="Search a Place" 
+                    id="searchKeyWord" 
+                    (keypress)="getUserSearchCity(country.value, $event)" 
+                    (input)="hideErrorMessages(country)">
+                <i class="bi bi-search search-icon" (click)="getUserSearchCity(country.value, $event)"></i>
             </div>
         </div>
         
@@ -20,4 +25,9 @@
             </p-dropdown>
         </div>
     </div>
+
+    <div class="row px-4 px-sm-3 d-flex justify-content-center align-items-center">
+        <p class="err"  *ngIf="showErr" >Please Enter Valid Country Name!</p>
+    </div>
+
 </div>

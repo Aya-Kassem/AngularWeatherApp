@@ -1,14 +1,5 @@
 <div class="container m-auto ">
-    <div class="row  justify-content-center">
-        <!-- MAIN PART -->
-        <div class="col-md-5 d-flex flex-column align-items-center justify-content-center text-white ">
-            <h4>{{ countryMainData.city }}, {{ countryMainData.name }}</h4>
-            <h3 class="my-1">{{ countryMainData.state }}</h3>
-            <span>{{ countryMainData.time }}</span>
-        </div>
-    </div>
-
-    <div class="row mt-2">
+    <div class="row">
         <!-- DAYS PART -->
         <div class="col-md-4 p-1">
             <weekDays [threeDaysWeather]="daysUI" (selectedDay)="getWeatherOfSelectedDay($event)"></weekDays>
