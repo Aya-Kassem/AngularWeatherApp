@@ -1,25 +1,25 @@
 # Angular Weather App ...
-This project is a simple Weather application built with Angular 16, displaying 3 days weather for user input Country.
+This project is a simple Weather application built with Angular 16, displaying 3 weather days for user input Country.
 
 ## App Features ... 
 1- Displaying Weather For 3 Days.
-  - User Can Choose each day to see the weather of selected Day.
-  - HighCharts used to display the avg temperatures along the day.
+  - User Can Choose each day to see the weather of the selected Day.
+  - HighCharts are used to display the average temperatures throughout the day.
   - Circle Progress to show the Humidity level in each day.
-  - UV gradient to display the UV degree in each day.
-  - Sunrise and Sunset Times in each Day.
+  - UV gradient to display the UV degree each day.
+  - Sunrise and Sunset Times on each Day.
   
 
 2- User Default Country.
-  - Enable User to input the default country name or city name and save it to local storage as default country.
+  - Enable the User to input the default country or city name and save it to local storage as the default country.
   - Validate User Input.
 
 3- User Search.
-  - Enable user to search any Country or city to check the weather.
+  - Enable users to search any Country or city to check the weather.
   - Validate User Input.
 
 4- Favorite Section.
-  - Save user search in Fav dropdown so user can choose from favorites later.
+  - Save user search in the Fav dropdown so the user can choose from favorites later.
 
 ## Technologies Used
 - Angular 16, Standalone Components.
@@ -32,6 +32,7 @@ This project is a simple Weather application built with Angular 16, displaying 3
 - LocalStorage
 
 ##  App Demo
+https://github.com/Aya-Kassem/AngularWeatherApp/assets/90005145/06996c33-faf1-4944-930d-a43e07088b4c
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/your-username/your-repo.git`
@@ -40,3 +41,6 @@ This project is a simple Weather application built with Angular 16, displaying 3
 4. Run the development server: `ng serve`
 5. Open your browser and navigate to `http://localhost:4200/`
 
+## Important Note
+Please be aware that this app is a mock app for this weather desktop app image
+![OriginalApp](https://github.com/Aya-Kassem/AngularWeatherApp/assets/90005145/741e66f4-967c-492e-90e1-e6eb1b4e66ef)
