@@ -14,7 +14,7 @@
         </div>
         
         <div class="col-sm-6 col-md-5 col-lg-4 px-1" >
-            <p-dropdown [options]="cities" class="dropDown" (onChange)="getWeatherfromfavourites($event)">
+            <p-dropdown [(ngModel)]="currentCity" [options]="cities" class="dropDown" (onChange)="getWeatherfromfavourites($event)">
                 <ng-template let-option pTemplate="selectedItem">
                     <span class="heart-icon"><i class="bi bi-heart-fill"></i></span>
                     {{ currentCity}}

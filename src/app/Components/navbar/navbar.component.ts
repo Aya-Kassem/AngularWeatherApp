@@ -22,7 +22,7 @@ export class NavbarComponent {
     constructor(private _weatherService: WeatherService, private _Renderer2: Renderer2) { }
     
     ngOnInit() {
-        this.currentCity = this._weatherService.defaultCountry;
+        this.currentCity = this.getFirstLetterCapitalize(this._weatherService.defaultCountry);
         let savedCities = JSON.parse(localStorage.getItem('cities')!) || [];
         if (savedCities) {
             this.cities = savedCities;
