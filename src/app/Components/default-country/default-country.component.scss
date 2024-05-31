@@ -11,9 +11,8 @@
     width: 100vw;
     height: 100vh;
     z-index: 2;
-
     .country{
-        background-color: #fff;
+        background-color: #a689c9;
         border-radius: 5px;
         width: 55%;
         margin: auto !important;
@@ -32,9 +31,10 @@
         button{
             border: none;
             border-radius: 4px;
-            background-color: #874CCC;
-            color: #fff;
+            background-color: #fff;
+            color: #874CCC;
             padding: 4px 35px;
+            font-weight: 500;
         }
         .err{
             font-size: 20px;
@@ -44,7 +44,8 @@
         .header{
             font-size: 20px;
             font-weight: 500;
-            color: #68737d;
+            // color: #68737d;
+            color: #fff;
         }
 
         input{

@@ -1,11 +1,13 @@
-<div class="main container-fluid d-flex flex-column">
+
+<defaultCountry *ngIf="!isContentVisible" (isModalVisible)="showContent($event)"></defaultCountry>
+
+<div class="main container-fluid d-flex flex-column" *ngIf="isContentVisible">
   <div class="bg"></div>
-  <defaultCountry *ngIf="!isContentVisible" (isModalVisible)="showContent($event)"></defaultCountry>
   <!-- NAVBAR -->
-  <navbar *ngIf="isContentVisible" ></navbar>
+  <navbar  ></navbar>
 
   <!-- COUNTRY INFO -->
-  <div class="row  justify-content-center my-3" *ngIf="isContentVisible">
+  <div class="row  justify-content-center my-3" >
       <div class="col-md-5 d-flex flex-column align-items-center justify-content-center text-white ">
           <h4>{{ city }} , {{ country }}</h4>
           <h3 class="my-1">{{ state }}</h3>
@@ -14,7 +16,8 @@
   </div>
 
   <!-- MAIN CONTENT -->
-  <div class="row content" *ngIf="isContentVisible">
+  <div class="row content" >
       <displayWeather (countryMainData)="getCurrentCountryInfo($event)"></displayWeather>
   </div>
+  
 </div>
