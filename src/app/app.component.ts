@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -32,7 +32,7 @@ export class AppComponent implements AfterViewInit {
   state!: string;
   isContentVisible: boolean = false;
   showLoader: boolean = true;
-  constructor(private _WeatherService: WeatherService, private _ChangeDetectorRef: ChangeDetectorRef) { }
+  constructor(private _WeatherService: WeatherService) { }
   
   ngOnInit() {
     let defaultCountryExist = localStorage.getItem('cities')!;
@@ -70,9 +70,9 @@ export class AppComponent implements AfterViewInit {
     return city;
   }
   ngAfterViewInit(){
-    console.log('aaa');
-    this.showLoader = false;
-    this._ChangeDetectorRef.detectChanges();
+    setTimeout(() => {
+      this.showLoader = false;
+    }, 1000)
   }
 
 

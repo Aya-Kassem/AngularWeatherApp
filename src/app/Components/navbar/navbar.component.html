@@ -17,10 +17,10 @@
             <p-dropdown [(ngModel)]="currentCity" [options]="cities" class="dropDown" (onChange)="getWeatherfromfavourites($event)">
                 <ng-template let-option pTemplate="selectedItem">
                     <span class="heart-icon"><i class="bi bi-heart-fill"></i></span>
-                    {{ currentCity}}
+                    {{ option }}
                 </ng-template>
                 <ng-template let-option pTemplate="item">
-                    {{ option}}
+                    {{ option }}
                 </ng-template>
             </p-dropdown>
         </div>
