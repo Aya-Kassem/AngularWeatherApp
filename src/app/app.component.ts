@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -12,10 +12,10 @@ import { LoaderComponent } from './Shared/loader/loader.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
-    NavbarComponent, 
-    DisplayWeatherComponent, 
+    CommonModule,
+    RouterOutlet,
+    NavbarComponent,
+    DisplayWeatherComponent,
     DefaultCountryComponent,
     LoaderComponent
   ],
@@ -24,7 +24,7 @@ import { LoaderComponent } from './Shared/loader/loader.component';
 })
 
 
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'weatherApp';
   country!: string;
   city!: string;
@@ -32,8 +32,10 @@ export class AppComponent implements AfterViewInit {
   state!: string;
   isContentVisible: boolean = false;
   showLoader: boolean = true;
-  constructor(private _WeatherService: WeatherService) { }
-  
+
+  constructor(
+    private _WeatherService: WeatherService) { }
+
   ngOnInit() {
     let defaultCountryExist = localStorage.getItem('cities')!;
     defaultCountryExist = JSON.parse(defaultCountryExist);
@@ -45,8 +47,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   getCurrentCountryInfo(countryInfo: countryData) {
-    if(countryInfo) this.isContentVisible = true;
-    
+    if (countryInfo) this.isContentVisible = true;
     this.country = countryInfo.name;
     this.city = countryInfo.city;
     this.time = countryInfo.time;
@@ -69,7 +70,8 @@ export class AppComponent implements AfterViewInit {
     const city = capitalizeFirstLetter + word.slice(1);
     return city;
   }
-  ngAfterViewInit(){
+
+  ngAfterViewInit() {
     setTimeout(() => {
       this.showLoader = false;
     }, 1000)

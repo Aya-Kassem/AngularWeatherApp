@@ -1,23 +1,27 @@
+<!-- LOADER -->
 <loader *ngIf="showLoader"></loader>
-<div class="main container-fluid d-flex flex-column" *ngIf="!showLoader" >
-    <div class="bg"></div>
-    <defaultCountry *ngIf="!isContentVisible" (isModalVisible)="showContent($event)"></defaultCountry>
 
-    <!-- NAVBAR -->
-    <navbar *ngIf="isContentVisible"></navbar>
+<!-- BACKGROUND IMAGE -->
+<div class="image-wrapper" [ngClass]="{'showBackground': !showLoader}" >
+  <img src="assets/images/weather-effects-composition.jpg" alt="weather" class="background-image" [ngClass]="{'showBackground': !showLoader}" >
+</div>
 
-    <!-- COUNTRY INFO -->
-    <div class="row justify-content-center my-3" *ngIf="isContentVisible">
-        <div class="col-md-5 d-flex flex-column align-items-center justify-content-center text-white ">
-            <h4 class="text-center">{{ city }} , {{ country }}</h4>
-            <h3 class="my-1 text=center">{{ state }}</h3>
-            <span class="text-center">{{ time }}</span>
-        </div>
+<div class="main container-fluid d-flex flex-column" *ngIf="!showLoader">
+  <defaultCountry *ngIf="!isContentVisible" (isModalVisible)="showContent($event)"></defaultCountry>
+  <!-- NAVBAR -->
+  <navbar *ngIf="isContentVisible"></navbar>
+
+  <!-- COUNTRY INFO -->
+  <div class="row justify-content-center my-3" *ngIf="isContentVisible">
+    <div class="col-md-5 d-flex flex-column align-items-center justify-content-center text-white ">
+      <h4 class="text-center">{{ city }}, {{ country }}</h4>
+      <h3 class="my-1 text=center">{{ state }}</h3>
+      <span class="text-center">{{ time }}</span>
     </div>
+  </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="row content" *ngIf="isContentVisible">
-        <displayWeather (countryMainData)="getCurrentCountryInfo($event)"></displayWeather>
-    </div>
-
+  <!-- MAIN CONTENT -->
+  <div class="row content" *ngIf="isContentVisible">
+    <displayWeather (countryMainData)="getCurrentCountryInfo($event)"></displayWeather>
+  </div>
 </div>
