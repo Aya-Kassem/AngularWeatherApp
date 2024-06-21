@@ -46,6 +46,12 @@ export class AppComponent {
     }
   }
 
+  hideLoader(){
+    setTimeout(() => {
+      this.showLoader = false;
+    }, 500)
+    
+  }
   getCurrentCountryInfo(countryInfo: countryData) {
     if (countryInfo) this.isContentVisible = true;
     this.country = countryInfo.name;
@@ -69,12 +75,6 @@ export class AppComponent {
     const capitalizeFirstLetter = word.slice(0, 1).toLocaleUpperCase();
     const city = capitalizeFirstLetter + word.slice(1);
     return city;
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.showLoader = false;
-    }, 1000)
   }
 
 

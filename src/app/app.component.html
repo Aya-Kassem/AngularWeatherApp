@@ -3,7 +3,7 @@
 
 <!-- BACKGROUND IMAGE -->
 <div class="image-wrapper" [ngClass]="{'showBackground': !showLoader}" >
-  <img src="assets/images/weather-effects-composition.jpg" alt="weather" class="background-image" [ngClass]="{'showBackground': !showLoader}" >
+  <img (load)="hideLoader()" src="assets/images/weather-effects-composition.jpg" alt="weather" class="background-image" [ngClass]="{'showBackground': !showLoader}" >
 </div>
 
 <div class="main container-fluid d-flex flex-column" *ngIf="!showLoader">
