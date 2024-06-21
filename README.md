@@ -32,7 +32,7 @@ This project is a simple Weather application built with Angular 16, displaying 3
 - LocalStorage
 
 ##  App Demo
-https://github.com/Aya-Kassem/AngularWeatherApp/assets/90005145/06996c33-faf1-4944-930d-a43e07088b4c
+[weatherApp.webm](https://github.com/Aya-Kassem/AngularWeatherApp/assets/90005145/0494b8b8-b9d6-46a5-95a5-2ee999845f4b)
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/your-username/your-repo.git`
